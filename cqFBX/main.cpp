@@ -1,5 +1,6 @@
 #define comp_level_horizon 0.01
 #define comp_level_deriv 0.01
+#define comp_level_integError 0.01
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -32,6 +33,9 @@ bool slopkeepTest(FbxAnimCurve* curve, FbxAnimCurveKey prevkey, FbxAnimCurveKey 
 	deriv3 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
 	deriv4 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
 		
+	FbxTime mili;
+	mili.SetMilliSeconds(1);
+	output3 << "deriv1 : " << deriv1 << ", val : " << prevkey.GetValue() << ", +1mili value : " << curve->EvaluateRightDerivative(prevt + mili) << endl;
 	float derivl11, derivl12, derivl21, derivl22;
 	float derivr11, derivr12, derivr21, derivr22;
 
@@ -89,9 +93,17 @@ bool slopkeepTest(FbxAnimCurve* curve, FbxAnimCurveKey prevkey, FbxAnimCurveKey 
 			abs(deriv3 - deriv4) < comp_level_deriv
 			)
 		{
-			return false;
+			float nearCurr = (deriv1*(currt.GetMilliSeconds() - prevt.GetMilliSeconds())) + prevkey.GetValue();
+			float nearNext = (deriv3*(nextt.GetMilliSeconds() - currt.GetMilliSeconds())) + currkey.GetValue();
+			if (
+				abs(nearCurr - currkey.GetValue()) < comp_level_integError &&
+				abs(nearNext - nextkey.GetValue()) < comp_level_integError
+				)
+				return false;
 		}
 	}
+	
+	
 	return true;
 	/*
 	if (
