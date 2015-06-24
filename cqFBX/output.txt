@@ -174,8 +174,8 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 			channel.0 curvecnt : 0
 		curvenode 55 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 453, 51 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 510, 37 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 453, 145 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 510, 237 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 56 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -186,32 +186,32 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 486, 25 keys removed		curvenode 58 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 477, 40 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 477, 38 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 477, 332 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 477, 248 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 55, 28 keys removed		curvenode 59 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
-				curve no.0 : key count : 77, 22 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 77, 32 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 60 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
-				curve no.0 : key count : 479, 30 keys removed		curvenode 61 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 479, 32 keys removed		curvenode 61 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 473, 34 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 474, 34 keys removed			channel.2 curvecnt : 1
-				curve no.0 : key count : 46, 21 keys removed		curvenode 62 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 473, 300 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 474, 322 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 46, 22 keys removed		curvenode 62 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
-				curve no.0 : key count : 86, 33 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 86, 39 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 63 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
-				curve no.0 : key count : 451, 27 keys removed		curvenode 64 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 451, 28 keys removed		curvenode 64 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 422, 65 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 422, 68 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 422, 224 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 422, 278 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 17, 7 keys removed		curvenode 65 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -222,8 +222,8 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 462, 57 keys removed		curvenode 67 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 177, 62 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 153, 58 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 177, 153 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 153, 136 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 9, 3 keys removed		curvenode 68 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -232,10 +232,10 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
-				curve no.0 : key count : 394, 71 keys removed		curvenode 70 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 394, 73 keys removed		curvenode 70 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 20, 9 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 20, 9 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 20, 18 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 20, 18 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 71 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -246,8 +246,8 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 20, 9 keys removed		curvenode 73 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 431, 69 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 429, 63 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 431, 262 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 429, 246 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 19, 9 keys removed		curvenode 74 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -258,9 +258,9 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 466, 28 keys removed		curvenode 76 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 264, 101 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 264, 91 keys removed			channel.2 curvecnt : 1
-				curve no.0 : key count : 53, 27 keys removed		curvenode 77 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 264, 224 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 264, 202 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 53, 29 keys removed		curvenode 77 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
@@ -270,9 +270,9 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 387, 70 keys removed		curvenode 79 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 175, 56 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 175, 54 keys removed			channel.2 curvecnt : 1
-				curve no.0 : key count : 29, 9 keys removed		curvenode 80 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 175, 103 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 175, 95 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 29, 13 keys removed		curvenode 80 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
@@ -282,12 +282,12 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 235, 46 keys removed		curvenode 82 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 104, 32 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 106, 34 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 104, 49 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 106, 65 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 83, 39 keys removed		curvenode 83 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 170, 75 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 188, 80 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 170, 77 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 188, 81 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 119, 65 keys removed		curvenode 84 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -295,7 +295,7 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 113, 33 keys removed		curvenode 85 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1623*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 10, 4 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 10, 4 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 10, 8 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 86 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1623*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -307,7 +307,7 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2		curvenode 88 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1623*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 10, 4 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 10, 4 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 10, 8 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 89 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1623*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -318,8 +318,8 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 11, 4 keys removed		curvenode 91 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 451, 122 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 451, 107 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 451, 305 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 451, 351 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 92 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -328,10 +328,10 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
-				curve no.0 : key count : 527, 22 keys removed		curvenode 94 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 527, 26 keys removed		curvenode 94 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 105, 22 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 105, 23 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 105, 44 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 105, 50 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 95 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -342,8 +342,8 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
 				curve no.0 : key count : 138, 14 keys removed		curvenode 97 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 107, 19 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 107, 19 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 107, 35 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 107, 31 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 98 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -462,8 +462,8 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 			channel.2 curvecnt : 0
 		curvenode 127 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
-				curve no.0 : key count : 111, 28 keys removed			channel.1 curvecnt : 1
-				curve no.0 : key count : 122, 34 keys removed			channel.2 curvecnt : 1
+				curve no.0 : key count : 111, 88 keys removed			channel.1 curvecnt : 1
+				curve no.0 : key count : 122, 103 keys removed			channel.2 curvecnt : 1
 				curve no.0 : key count : 2		curvenode 128 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
@@ -472,7 +472,7 @@ scene's node 30 : overhead, childcnt : 0, att type : 3
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1
-				curve no.0 : key count : 146, 20 keys removed		curvenode 130 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
+				curve no.0 : key count : 146, 21 keys removed		curvenode 130 channel cnt : 3, dst obj cnt 2(,<29>,BaseLayer<0>), start : 0, end : 1856*
 			channel.0 curvecnt : 1
 				curve no.0 : key count : 2			channel.1 curvecnt : 1
 				curve no.0 : key count : 2			channel.2 curvecnt : 1

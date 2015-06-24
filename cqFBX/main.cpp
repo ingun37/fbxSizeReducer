@@ -1,3 +1,4 @@
+#define comp_level_horizon 0.01
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -158,15 +159,19 @@ int main(int argc, char **argv)
 
 							FbxLongLong tmpll = (currt - prevt).GetMilliSeconds()/3;
 							FbxTime termt;
-							
+							float slopes[6];
 							for (int termi = 0; termi < 3; termi++)
 							{
 								termt.SetMilliSeconds(tmpll*termi);
 								float tmpf = curve->Evaluate(prevt + termt);
+								
+								
+
 								output2 << "time:" << (prevt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(prevt + termt) << "(premid)";
 								if (termi > 0)
 								{
-									if (abs(prevEv - tmpf) > 0.0001)
+									output2 << "\t\t\t\t\t, left slope : " << (slopes[termi] = ((tmpf - prevEv) / tmpll) * (1000.f/24));
+									if (abs(prevEv - tmpf) > comp_level_horizon)
 									{
 										output2 << "(true)";
 										needit = true;
@@ -177,17 +182,22 @@ int main(int argc, char **argv)
 								prevEv = tmpf;
 							}
 
-							output2 << "time:" << currt.GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt) << "(key)" << "interpolation kind : " << ((int)currkey.GetInterpolation()) << endl;
-
+							output2 << "time:" << currt.GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt) << "(key)" << "interpolation kind : " << ((int)currkey.GetInterpolation());
+							output2 << ", left right deriv : " << "(" << currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope)<< ")";
+							output2 << endl;
 							tmpll = (nextt - currt).GetMilliSeconds() / 3;
-							if (needit == false)
+							if (!needit)
 							{
 								for (int termi = 0; termi < 3; termi++)
 								{
 									termt.SetMilliSeconds(tmpll*termi);
 									float tmpf = curve->Evaluate(currt + termt);
+
+									
+
 									output2 << "time:" << (currt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt + termt) << "(postmid)";
-									if (abs(prevEv - tmpf) > 0.0001)
+									output2 << "\t\t\t\t\t, left slope : " << (slopes[3 + termi] = ((tmpf - prevEv) / tmpll) * (1000.f / 24));
+									if (abs(prevEv - tmpf) > comp_level_horizon)
 									{
 										output2 << "(true)";
 										needit = true;
@@ -198,10 +208,42 @@ int main(int argc, char **argv)
 								}
 							}
 
+							if (needit)
+							{
+								float deriv1, deriv2, deriv3, deriv4;
+								deriv1 = prevkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
+								deriv2 = prevkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
+								deriv3 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
+								deriv4 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
+
+								output2 << "4 deris : " << deriv1<< "\t\t"
+									<< deriv2 << "\t\t"
+									<< deriv3 << "\t\t"
+									<< deriv4 << endl;
+								if (
+									abs(deriv1 - deriv2) < 0.001 &&
+									abs(deriv2 - deriv3) < 0.001 &&
+									abs(deriv3 - deriv4) < 0.001 && (deriv1 + deriv2 + deriv3 + deriv4) > 0.001
+									)
+									output2 << "same deriv" << endl;
+
+								for (int slpi = 1; slpi < 5; slpi++)
+								{
+									if (abs(slopes[slpi] - slopes[slpi + 1]) > 0.005)
+									{
+
+										needit = true;
+										break;
+									}
+								}
+								if (!needit)
+									output2 << "same slope" << endl;
+							}
+
 							if (!needit)
 							{
 								if (!(currkey.GetInterpolation() == FbxAnimCurveDef::EInterpolationType::eInterpolationConstant && nextkey.GetInterpolation() != FbxAnimCurveDef::EInterpolationType::eInterpolationConstant))
-								keys2Remove.push_back(cki);
+									keys2Remove.push_back(cki);
 							}
 						}
 						for (int kri = keys2Remove.size() - 1; kri >= 0; kri--)
@@ -215,78 +257,18 @@ int main(int argc, char **argv)
 							output << ", " << keys2Remove.size() << " keys removed";
 
 						keycnt = curve->KeyGetCount();
-						output3 << "new keycnt for curve no." << ci << " is " << keycnt << endl;
-						for (int cki = 0; cki < keycnt; cki++)
-						{
-							FbxAnimCurveKey prevkey, currkey, nextkey;
-
-							if (cki == 0 || cki == keycnt - 1)
-								continue;
-
-							currkey = curve->KeyGet(cki);
-
-							prevkey = curve->KeyGet(cki - 1);
-							nextkey = curve->KeyGet(cki + 1);
-							FbxTime prevt = prevkey.GetTime();
-							FbxTime currt = currkey.GetTime();
-							FbxTime nextt = nextkey.GetTime();
-
-							bool needit = false;
-							float prevEv;
-
-							FbxLongLong tmpll = (currt - prevt).GetMilliSeconds() / 3;
-							FbxTime termt;
-
-							for (int termi = 0; termi < 3; termi++)
-							{
-								termt.SetMilliSeconds(tmpll*termi);
-								float tmpf = curve->Evaluate(prevt + termt);
-								output3 << "time:" << (prevt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(prevt + termt) << "(premid)";
-								if (termi > 0)
-								{
-									if (abs(prevEv - tmpf) > 0.0001)
-									{
-										output3 << "(true)";
-										needit = true;
-										//break;
-									}
-								}
-								output3 << endl;
-								prevEv = tmpf;
-							}
-
-							output3 << "time:" << currt.GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt) << "(key)" << "interpolation kind : " << ((int)currkey.GetInterpolation()) << endl;
-
-							tmpll = (nextt - currt).GetMilliSeconds() / 3;
-							if (needit == false)
-							{
-								for (int termi = 0; termi < 3; termi++)
-								{
-									termt.SetMilliSeconds(tmpll*termi);
-									float tmpf = curve->Evaluate(currt + termt);
-									output3 << "time:" << (currt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt + termt) << "(postmid)";
-									if (abs(prevEv - tmpf) > 0.0001)
-									{
-										output3 << "(true)";
-										needit = true;
-										//break;
-									}
-									output3 << endl;
-									prevEv = tmpf;
-								}
-							}
-						}
+						
 					}
 
 				}
 			}
 			//이부분은 별로 효과없음
-			/*
+			
 			for (int di = 0; di < nodes2del.size(); di++)
 			{
 				layer->RemoveMember(nodes2del[di]);
 			}
-			/**/
+			
 			
 		}
 	}
