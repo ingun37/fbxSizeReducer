@@ -1,16 +1,185 @@
 #define comp_level_horizon 0.01
+#define comp_level_deriv 0.01
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <fbxsdk.h>
 #include <math.h>
+#include <iomanip>
 using namespace std;
 
+ofstream output, output2, output3;
+
+bool slopkeepTest(FbxAnimCurve* curve, FbxAnimCurveKey prevkey, FbxAnimCurveKey currkey, FbxAnimCurveKey nextkey)
+{
+	FbxTime prevt = prevkey.GetTime();
+	FbxTime currt = currkey.GetTime();
+	FbxTime nextt = nextkey.GetTime();
+
+	float slope1 = (currkey.GetValue() - prevkey.GetValue()) / (currt.GetSecondDouble() - prevt.GetSecondDouble());
+	float slope2 = (nextkey.GetValue() - currkey.GetValue()) / (nextt.GetSecondDouble() - currt.GetSecondDouble());
+	output2 << setw(20) << "slope : " << setw(10) << setprecision(3) << slope1 << "," << setw(10) << slope2;
+	if (abs(slope1 - slope2) > 0.005)
+	{
+		output2 << "  keepinSlope" << endl;
+		return true;
+	}
+	output2 << endl;
+
+	float deriv1, deriv2, deriv3, deriv4;
+	deriv1 = prevkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
+	deriv2 = prevkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
+	deriv3 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
+	deriv4 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
+		
+	float derivl11, derivl12, derivl21, derivl22;
+	float derivr11, derivr12, derivr21, derivr22;
+
+	FbxTime term1, term2;
+	term1.SetSecondDouble((currt.GetSecondDouble() - prevt.GetSecondDouble()) / 3);
+	term2.SetSecondDouble((nextt.GetSecondDouble() - currt.GetSecondDouble()) / 3);
+
+	derivl11 = curve->EvaluateLeftDerivative(prevt + term1);
+	derivl12 = curve->EvaluateLeftDerivative(prevt + term1 + term1);
+	derivl21 = curve->EvaluateLeftDerivative(currt + term2);
+	derivl22 = curve->EvaluateLeftDerivative(currt + term2 + term2);
+
+	derivr11 = curve->EvaluateRightDerivative(prevt + term1);
+	derivr12 = curve->EvaluateRightDerivative(prevt + term1 + term1);
+	derivr21 = curve->EvaluateRightDerivative(currt + term2);
+	derivr22 = curve->EvaluateRightDerivative(currt + term2 + term2);
+
+		
+	output2 << setw(20) << "deriv : " << setprecision(3)
+		<< deriv1  <<","
+		<< deriv2  <<","
+		<< deriv3  <<","
+		<< deriv4  <<","
+		<< derivl11<<","
+		<< derivl12<<","
+		<< derivl21<<","
+		<< derivl22<<","
+		<< derivr11<<","
+		<< derivr12<<","
+		<< derivr21<<","
+		<< derivr22<<","
+		;
+
+	if (
+		prevkey.GetInterpolation() == FbxAnimCurveDef::eInterpolationConstant &&
+		currkey.GetInterpolation() == FbxAnimCurveDef::eInterpolationConstant &&
+		nextkey.GetInterpolation() == FbxAnimCurveDef::eInterpolationConstant
+		)
+	{
+		if (
+			abs(prevkey.GetValue() - currkey.GetValue()) < comp_level_horizon &&
+			abs(currkey.GetValue() - nextkey.GetValue()) < comp_level_horizon
+			)
+			return false;
+	}
+	else if (
+		prevkey.GetInterpolation() == FbxAnimCurveDef::eInterpolationCubic &&
+		currkey.GetInterpolation() == FbxAnimCurveDef::eInterpolationCubic &&
+		nextkey.GetInterpolation() == FbxAnimCurveDef::eInterpolationCubic
+		)
+	{
+		if (
+			abs(deriv1 - deriv2) < comp_level_deriv &&
+			abs(deriv2 - deriv3) < comp_level_deriv &&
+			abs(deriv3 - deriv4) < comp_level_deriv
+			)
+		{
+			return false;
+		}
+	}
+	return true;
+	/*
+	if (
+		abs(deriv1 - deriv2) < 0.005 &&
+		abs(deriv2 - deriv3) < 0.005 &&
+		abs(deriv3 - deriv4) < 0.005 &&
+		abs(deriv4 - derivl11) < 0.005 &&
+		abs(derivl11 - derivr11) < 0.005 &&
+		abs(derivr11 - derivl12) < 0.005 &&
+		abs(derivl12 - derivr12) < 0.005 &&
+		abs(derivr12 - derivl21) < 0.005 &&
+		abs(derivl21 - derivr21) < 0.005 &&
+		abs(derivr21 - derivl22) < 0.005 &&
+		abs(derivl22 - derivr22) < 0.005
+		)
+	{
+	}
+	else
+	{
+		output2 << "keepinDeriv" << endl;
+		return true;
+	}
+	output2 << "removable key" << endl;
+	*/
+
+
+	return false;
+}
+
+bool keepTestHorizon(  FbxAnimCurve* curve, FbxAnimCurveKey prevkey, FbxAnimCurveKey currkey, FbxAnimCurveKey nextkey)
+{
+	FbxTime prevt = prevkey.GetTime();
+	FbxTime currt = currkey.GetTime();
+	FbxTime nextt = nextkey.GetTime();
+
+	bool needit = false;
+	float prevEv;
+
+	FbxLongLong tmpll = (currt - prevt).GetMilliSeconds() / 3;
+	FbxTime termt;
+
+	float tmpfs[6] = { -1, };
+	FbxTime times[6];
+
+	for (int termi = 0; termi < 3; termi++)
+	{
+		termt.SetMilliSeconds(tmpll*termi);
+		times[termi] = prevt + termt;
+	}
+
+	tmpll = (nextt - currt).GetMilliSeconds() / 3;
+
+	for (int termi = 0; termi < 3; termi++)
+	{
+		termt.SetMilliSeconds(tmpll*termi);
+		times[3 + termi] = currt + termt;
+	}
+
+	output2 << setw(20 + output2.rdbuf()->in_avail() - 4096) << "timee : ";
+
+	
+	for (int i = 0; i < 6; i++)
+	{
+		
+		output2 << setw(10) << setiosflags(ios::fixed) << setprecision(3) << (times[i]).GetSecondDouble() << "\t";
+		tmpfs[i] = curve->Evaluate(times[i]);
+	}
+
+	output2 << endl << setw(20) << "value : ";
+	for (int i = 0; i < 6; i++)
+	{
+		output2 << setw(10) << setiosflags(ios::fixed) << setprecision(3) << tmpfs[i] << "\t";
+	}
+	for (int i = 1; i<6;i++)
+		if (abs(tmpfs[i] - tmpfs[i-1]) > comp_level_horizon)
+		{
+			output2 << "keepinHorizon at : " << i << endl;
+			return true;
+		}
+
+	output2 << endl;
+	return false;
+}
 int main(int argc, char **argv)
 {
 	const char* filename = "PC@GUN.fbx";
 
-	ofstream output, output2, output3;
+	
 	output.open("output.txt", ios::out | ios::trunc);
 	output2.open("output2.txt", ios::out | ios::trunc);
 	output3.open("output3.txt", ios::out | ios::trunc);
@@ -127,7 +296,7 @@ int main(int argc, char **argv)
 						FbxAnimCurve* curve = cnode->GetCurve(chi, ci);
 						int keycnt = curve->KeyGetCount();
 						output << "\t\t\t\tcurve no." << ci << " : key count : " << keycnt;
-						output2 << "curve  " << endl;
+						output2 << "curve  " << ci << endl;
 						
 						vector<int> keys2Remove;
 						for (int cki = 0; cki < keycnt; cki++)
@@ -138,109 +307,18 @@ int main(int argc, char **argv)
 								continue;
 							
 							currkey = curve->KeyGet(cki);
-
-							{
-								if (currkey.GetInterpolation() == FbxAnimCurveDef::EInterpolationType::eInterpolationConstant)
-									cons++;
-								if (currkey.GetInterpolation() == FbxAnimCurveDef::EInterpolationType::eInterpolationCubic)
-									cubic++;
-								if (currkey.GetInterpolation() == FbxAnimCurveDef::EInterpolationType::eInterpolationLinear)
-									linear++;
-							}
-							
 							prevkey = curve->KeyGet(cki-1);
 							nextkey = curve->KeyGet(cki + 1);
-							FbxTime prevt = prevkey.GetTime();
-							FbxTime currt = currkey.GetTime();
-							FbxTime nextt = nextkey.GetTime();
+							
+							bool keepit;
 
-							bool needit = false;
-							float prevEv;
+							output2 << ci << "-" << cki;
 
-							FbxLongLong tmpll = (currt - prevt).GetMilliSeconds()/3;
-							FbxTime termt;
-							float slopes[6];
-							for (int termi = 0; termi < 3; termi++)
-							{
-								termt.SetMilliSeconds(tmpll*termi);
-								float tmpf = curve->Evaluate(prevt + termt);
-								
-								
+//							keepit = keepTestHorizon(curve, prevkey, currkey, nextkey);
+	//						if (keepit)
+								keepit = slopkeepTest(curve, prevkey, currkey, nextkey);
 
-								output2 << "time:" << (prevt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(prevt + termt) << "(premid)";
-								if (termi > 0)
-								{
-									output2 << "\t\t\t\t\t, left slope : " << (slopes[termi] = ((tmpf - prevEv) / tmpll) * (1000.f/24));
-									if (abs(prevEv - tmpf) > comp_level_horizon)
-									{
-										output2 << "(true)";
-										needit = true;
-										//break;
-									}
-								}
-								output2 << endl;
-								prevEv = tmpf;
-							}
-
-							output2 << "time:" << currt.GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt) << "(key)" << "interpolation kind : " << ((int)currkey.GetInterpolation());
-							output2 << ", left right deriv : " << "(" << currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope)<< ")";
-							output2 << endl;
-							tmpll = (nextt - currt).GetMilliSeconds() / 3;
-							if (!needit)
-							{
-								for (int termi = 0; termi < 3; termi++)
-								{
-									termt.SetMilliSeconds(tmpll*termi);
-									float tmpf = curve->Evaluate(currt + termt);
-
-									
-
-									output2 << "time:" << (currt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt + termt) << "(postmid)";
-									output2 << "\t\t\t\t\t, left slope : " << (slopes[3 + termi] = ((tmpf - prevEv) / tmpll) * (1000.f / 24));
-									if (abs(prevEv - tmpf) > comp_level_horizon)
-									{
-										output2 << "(true)";
-										needit = true;
-										//break;
-									}
-									output2 << endl;
-									prevEv = tmpf;
-								}
-							}
-
-							if (needit)
-							{
-								float deriv1, deriv2, deriv3, deriv4;
-								deriv1 = prevkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
-								deriv2 = prevkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
-								deriv3 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eRightSlope);
-								deriv4 = currkey.GetDataFloat(FbxAnimCurveDef::EDataIndex::eNextLeftSlope);
-
-								output2 << "4 deris : " << deriv1<< "\t\t"
-									<< deriv2 << "\t\t"
-									<< deriv3 << "\t\t"
-									<< deriv4 << endl;
-								if (
-									abs(deriv1 - deriv2) < 0.001 &&
-									abs(deriv2 - deriv3) < 0.001 &&
-									abs(deriv3 - deriv4) < 0.001 && (deriv1 + deriv2 + deriv3 + deriv4) > 0.001
-									)
-									output2 << "same deriv" << endl;
-
-								for (int slpi = 1; slpi < 5; slpi++)
-								{
-									if (abs(slopes[slpi] - slopes[slpi + 1]) > 0.005)
-									{
-
-										needit = true;
-										break;
-									}
-								}
-								if (!needit)
-									output2 << "same slope" << endl;
-							}
-
-							if (!needit)
+							if (!keepit)
 							{
 								if (!(currkey.GetInterpolation() == FbxAnimCurveDef::EInterpolationType::eInterpolationConstant && nextkey.GetInterpolation() != FbxAnimCurveDef::EInterpolationType::eInterpolationConstant))
 									keys2Remove.push_back(cki);
@@ -263,18 +341,18 @@ int main(int argc, char **argv)
 				}
 			}
 			//이부분은 별로 효과없음
-			
+			/*
 			for (int di = 0; di < nodes2del.size(); di++)
 			{
 				layer->RemoveMember(nodes2del[di]);
 			}
-			
+			*/
 			
 		}
 	}
 	output << "cubic:linear:const  " << cubic << ":" << linear << ":" << cons << endl;
 	FbxExporter* exporter = FbxExporter::Create(fm, "");
-	const char* outFBXName = "rd.fbx";
+	const char* outFBXName = "PC@aaaaf.fbx";
 
 	bool exportstatus = exporter->Initialize(outFBXName, -1, fm->GetIOSettings());
 	if (exportstatus == false)
