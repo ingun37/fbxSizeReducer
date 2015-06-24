@@ -9,9 +9,10 @@ int main(int argc, char **argv)
 {
 	const char* filename = "PC@GUN.fbx";
 
-	ofstream output, output2;
+	ofstream output, output2, output3;
 	output.open("output.txt", ios::out | ios::trunc);
 	output2.open("output2.txt", ios::out | ios::trunc);
+	output3.open("output3.txt", ios::out | ios::trunc);
 	if (!output.is_open())
 	{
 		exit(1);
@@ -96,8 +97,14 @@ int main(int argc, char **argv)
 			for (int j = 0; j < curvenodecnt; j++)
 			{
 				FbxAnimCurveNode* cnode = layer->GetMember<FbxAnimCurveNode>(j);
-				output << "\t\tcurvenode " << j << " channel cnt : " << cnode->GetChannelsCount() << ", dst obj cnt " << cnode->GetDstObjectCount();
-
+				output << "\t\tcurvenode " << j << " channel cnt : " << cnode->GetChannelsCount() << ", dst obj cnt " << cnode->GetDstObjectCount() << "(";
+				for (int dsti = 0; dsti < cnode->GetDstObjectCount(); dsti++)
+				{
+					output << "," << cnode->GetDstObject(dsti)->GetName();
+					if (cnode->GetDstObject(dsti)->GetSrcObjectCount() > 0)
+						output << "<" << cnode->GetDstObject(dsti)->GetSrcObjectCount<FbxSkeleton>() << ">";
+				}
+				output << ")";
 				FbxTimeSpan interval;
 				if (cnode->GetAnimationInterval(interval))
 				{
@@ -128,7 +135,7 @@ int main(int argc, char **argv)
 
 							if (cki == 0 || cki == keycnt - 1)
 								continue;
-
+							
 							currkey = curve->KeyGet(cki);
 
 							{
@@ -142,58 +149,144 @@ int main(int argc, char **argv)
 							
 							prevkey = curve->KeyGet(cki-1);
 							nextkey = curve->KeyGet(cki + 1);
-							
 							FbxTime prevt = prevkey.GetTime();
 							FbxTime currt = currkey.GetTime();
 							FbxTime nextt = nextkey.GetTime();
-							
 
-							FbxTime mint;
-							int addCnt = 0;
-							FbxTime spentt = prevt;
-							mint.SetMilliSeconds(10);
-							float prevderiv = -1;
-							bool needIt = false;
-							while (spentt < nextt)
+							bool needit = false;
+							float prevEv;
+
+							FbxLongLong tmpll = (currt - prevt).GetMilliSeconds()/3;
+							FbxTime termt;
+							
+							for (int termi = 0; termi < 3; termi++)
 							{
-								float deriv = abs(curve->EvaluateRightDerivative(spentt));
-								output2 << deriv << ", ";
-								if (prevderiv > -0.00001)
+								termt.SetMilliSeconds(tmpll*termi);
+								float tmpf = curve->Evaluate(prevt + termt);
+								output2 << "time:" << (prevt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(prevt + termt) << "(premid)";
+								if (termi > 0)
 								{
-									float dderiv = abs(deriv - prevderiv);
-									if (dderiv > 0.01)
+									if (abs(prevEv - tmpf) > 0.0001)
 									{
-										needIt = true;
-										break;
+										output2 << "(true)";
+										needit = true;
+										//break;
 									}
 								}
-								prevderiv = deriv;
-								spentt = spentt + mint;
+								output2 << endl;
+								prevEv = tmpf;
 							}
 
-							if (needIt == false)
+							output2 << "time:" << currt.GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt) << "(key)" << "interpolation kind : " << ((int)currkey.GetInterpolation()) << endl;
+
+							tmpll = (nextt - currt).GetMilliSeconds() / 3;
+							if (needit == false)
 							{
+								for (int termi = 0; termi < 3; termi++)
+								{
+									termt.SetMilliSeconds(tmpll*termi);
+									float tmpf = curve->Evaluate(currt + termt);
+									output2 << "time:" << (currt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt + termt) << "(postmid)";
+									if (abs(prevEv - tmpf) > 0.0001)
+									{
+										output2 << "(true)";
+										needit = true;
+										//break;
+									}
+									output2 << endl;
+									prevEv = tmpf;
+								}
+							}
+
+							if (!needit)
+							{
+								if (!(currkey.GetInterpolation() == FbxAnimCurveDef::EInterpolationType::eInterpolationConstant && nextkey.GetInterpolation() != FbxAnimCurveDef::EInterpolationType::eInterpolationConstant))
 								keys2Remove.push_back(cki);
 							}
 						}
-						for (int i = keys2Remove.size() - 1; i >= 0; i--)
+						for (int kri = keys2Remove.size() - 1; kri >= 0; kri--)
 						{
-							curve->KeyRemove(keys2Remove[i]);
+							
+							curve->KeyRemove(keys2Remove[kri]);
 						}
 						output2 << endl;
 						//output << ", cubic:linear:const : " << cubic << ":" << linear << ":" << cons << endl;
 						if (keys2Remove.size() > 0)
 							output << ", " << keys2Remove.size() << " keys removed";
-						output << endl;
+
+						keycnt = curve->KeyGetCount();
+						output3 << "new keycnt for curve no." << ci << " is " << keycnt << endl;
+						for (int cki = 0; cki < keycnt; cki++)
+						{
+							FbxAnimCurveKey prevkey, currkey, nextkey;
+
+							if (cki == 0 || cki == keycnt - 1)
+								continue;
+
+							currkey = curve->KeyGet(cki);
+
+							prevkey = curve->KeyGet(cki - 1);
+							nextkey = curve->KeyGet(cki + 1);
+							FbxTime prevt = prevkey.GetTime();
+							FbxTime currt = currkey.GetTime();
+							FbxTime nextt = nextkey.GetTime();
+
+							bool needit = false;
+							float prevEv;
+
+							FbxLongLong tmpll = (currt - prevt).GetMilliSeconds() / 3;
+							FbxTime termt;
+
+							for (int termi = 0; termi < 3; termi++)
+							{
+								termt.SetMilliSeconds(tmpll*termi);
+								float tmpf = curve->Evaluate(prevt + termt);
+								output3 << "time:" << (prevt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(prevt + termt) << "(premid)";
+								if (termi > 0)
+								{
+									if (abs(prevEv - tmpf) > 0.0001)
+									{
+										output3 << "(true)";
+										needit = true;
+										//break;
+									}
+								}
+								output3 << endl;
+								prevEv = tmpf;
+							}
+
+							output3 << "time:" << currt.GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt) << "(key)" << "interpolation kind : " << ((int)currkey.GetInterpolation()) << endl;
+
+							tmpll = (nextt - currt).GetMilliSeconds() / 3;
+							if (needit == false)
+							{
+								for (int termi = 0; termi < 3; termi++)
+								{
+									termt.SetMilliSeconds(tmpll*termi);
+									float tmpf = curve->Evaluate(currt + termt);
+									output3 << "time:" << (currt + termt).GetTimeString() << "\t\tvalue : " << curve->Evaluate(currt + termt) << "(postmid)";
+									if (abs(prevEv - tmpf) > 0.0001)
+									{
+										output3 << "(true)";
+										needit = true;
+										//break;
+									}
+									output3 << endl;
+									prevEv = tmpf;
+								}
+							}
+						}
 					}
 
 				}
 			}
 			//이부분은 별로 효과없음
+			/*
 			for (int di = 0; di < nodes2del.size(); di++)
 			{
 				layer->RemoveMember(nodes2del[di]);
 			}
+			/**/
 			
 		}
 	}
@@ -214,5 +307,6 @@ int main(int argc, char **argv)
 	fm->Destroy();
 	output.close();
 	output2.close();
+	output3.close();
 	return 0;
 }
