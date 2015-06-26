@@ -35,7 +35,7 @@ poly 16 : size:4, startidx:73, link : , (73,74:-4.7196), (74,75:0.21188), (75,76
 poly 17 : size:4, startidx:77, link : , (78,77:0.059238), (77,79:-16.881), (79,80:0.059239), (80,78:-16.881)
 poly 18 : size:4, startidx:81, link : , (82,81:0), (81,83:99999), (83,84:0), (84,82:99999)
 poly 19 : size:4, startidx:85, link : , (87,88:99999), (88,86:0), (86,85:99999), (85,87:0)
-removable points : 32, 33, 40, 41, 44, 45, 46, 
+removable points : 24, 32, 33, 39, 40, 41, 44, 45, 46, 
 	cluster no.0 has 0 connected verts
 	cluster no.1 has 4 connected verts
 	cluster no.2 has 4 connected verts

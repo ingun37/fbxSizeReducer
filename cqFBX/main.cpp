@@ -315,9 +315,8 @@ void collapseMesh(FbxMesh* mesh)
 
 			output << ", (" << edgeVIdx[polygonStartIdx+ei]<<","<<edgeVIdx[polygonStartIdx+((ei+1)%polysize)] <<":"<<setprecision(5)<<slopes[polygonStartIdx + ei]<< ")";
 
-			if (ei > 0)
 			{
-				if (abs(prevslope - slopes[polygonStartIdx + ei]) < 0.001)
+				if (abs(slopes[ polygonStartIdx + ( (ei==0)?(polysize-1):(ei-1) ) ] - slopes[polygonStartIdx + ei]) < 0.001)
 				{
 					removableEdgePoint.push_back(polygonStartIdx + ei);
 				}
