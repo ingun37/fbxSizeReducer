@@ -189,215 +189,117 @@ bool keepTestHorizon(  FbxAnimCurve* curve, FbxAnimCurveKey prevkey, FbxAnimCurv
 	return false;
 }
 
-void collapseMesh(FbxMesh* mesh)
+void computeAllSlopes(vector<vector<float>> &slopes, FbxMesh* mesh)
 {
-	if (!mesh->IsTriangleMesh())
-	{
-		output << "not triangle mesh" << endl;
-	//	return;
-	}
-	
-
-	output << "poly cnt : " << mesh->GetPolygonCount() << endl;
-	int accu=0;
-	const int* allverts = mesh->GetPolygonVertices();
-	output << "edge cnt : " << mesh->GetMeshEdgeCount() << endl;
-	output << "edge  : ";
-	for (int i = 0; i < mesh->mEdgeArray.GetCount(); i++)
-	{
-		output << setw(13) << mesh->mEdgeArray[i];
-	}
-	output << endl;
-	output << "cpcpx : ";
-
-	const FbxArray<FbxVector4>& cps = mesh->mControlPoints;
-	
-	vector<int> cpusecnt;
-	vector<int> uvusecnt;
-	//output << "cps ref " << &cps << ", " << &(cps[0]) << ", " << &(cps[0][0]) << endl;
-	//FbxArray<FbxVector4> ff = mesh->mControlPoints;
-	//output << "cps cpy " << &ff<< ", " << &(ff[0]) << ", " << &(ff[0][0]) << endl;
-	for (int i = 0; i < cps.GetCount(); i++)
-	{
-		cpusecnt.push_back(0);
-	}
-	for (int i = 0; i < mesh->GetTextureUVCount(); i++)
-	{
-		uvusecnt.push_back(0);
-	}
-	FbxLayerElementArrayTemplate<FbxVector2>* uvarr;
-	if (mesh->GetTextureUV(&uvarr))
-	{
-		if (mesh->GetTextureUVCount() == uvarr->GetCount())
-			output << "kakakakakakakakakak" << endl;
-		output << "uv : ";
-		for (int i = 0; i < uvarr->GetCount(); i++)
-		{
-			output << "(" << (*uvarr)[i][0] << "," << (*uvarr)[i][1] << ")" << endl;
-		}
-		output << endl;
-	}
-	else
-	{
-		output << "fail to read uv..." << endl;
-		return;
-	}
-
-	output << "cpcpy : ";
-	for (int i = 0; i < cps.GetCount(); i++)
-	{
-		output << setw(13)  << cps[i][1];
-	}
-
-	output << endl;
-
-	const FbxArray<int>& edgeVIdx = mesh->mPolygonVertices;
-	output << endl;
-	output << "mpvts : ";
-	for (int i = 0; i < edgeVIdx.GetCount(); i++)
-	{
-		output << setw(13) << edgeVIdx[i];
-		cpusecnt[edgeVIdx[i]]++;
-	}
-	output << endl;
-
-	output << "derivs : ";
-	vector<float> slopes;
+	output << "slopes-------------" << endl;
 	vector<int> polystarts;
 	vector<int> polysizes;
-	
+	const FbxArray<FbxVector4>& cps = mesh->mControlPoints;
+	const FbxArray<int>& edgesPoints = mesh->mPolygonVertices;
+
 	for (int i = 0; i < mesh->GetPolygonCount(); i++)
 	{
-		polystarts.push_back(mesh->GetPolygonVertexIndex(i));
-		polysizes.push_back(mesh->GetPolygonSize(i));
-		for (int j = 0; j < mesh->GetPolygonSize(i); j++)
+		int polysize = mesh->GetPolygonSize(i);
+		slopes.push_back(vector<float>());
+		output << "polygon(" << setw(3) << polysize << ")." << setw(3) << i << " -> ";
+		for (int j = 0; j < polysize; j++)
 		{
-			uvusecnt[mesh->GetTextureUVIndex(i, j)]++;
-			
-		}
-	}
-	int startcnt = 0;
-	for (int i = 0; i <edgeVIdx.GetCount(); i++)
-	{
-		
-		float tmpy;
-		float tmpx;
-
-		if (i == polystarts[startcnt] + polysizes[startcnt]-1)
-		{
-			tmpy = cps[edgeVIdx[ polystarts[startcnt] ]][1] - cps[edgeVIdx[i]][1];
-			tmpx = cps[edgeVIdx[ polystarts[startcnt] ]][0] - cps[edgeVIdx[i]][0];
-			startcnt++;
-		}
-		else
-		{
-			tmpy = cps[edgeVIdx[i+1]][1] - cps[edgeVIdx[i]][1];
-			tmpx = cps[edgeVIdx[i+1]][0] - cps[edgeVIdx[i]][0];
-		}
-		float slope;
-		if (abs(tmpx) < 0.0001)
-			slope = 99999;
-		else if (abs(tmpy) < 0.0001)
-			slope = 0;
-		else
-			slope = tmpy / tmpx;
-		slopes.push_back(slope);
-		output << setw(11) << slope << (tmpx>0?"+":"-") << (tmpy>0?"+":"-");
-		
-	}
-
-	output << endl;
-
-	int polyvnum = mesh->GetPolygonVertexCount();
-	output << "total polyv num : " << polyvnum << endl;
-	
-	vector<int> removableEdgePoint;
-	vector<int> refCntForCps;
-	for (int pi = 0; pi < mesh->GetPolygonCount(); pi++)
-	{
-		output << "poly " << pi << " : ";
-		int polygonStartIdx = mesh->GetPolygonVertexIndex(pi);
-		int polysize = mesh->GetPolygonSize(pi);
-		
-		output << "size:" << polysize << ", startidx:" << polygonStartIdx;
-		output << ", link : ";
-		float prevslope;
-		
-		for (int ei = 0; ei < polysize; ei++)
-		{
-
-			output << ", (" << edgeVIdx[polygonStartIdx+ei]<<","<<edgeVIdx[polygonStartIdx+((ei+1)%polysize)] <<":"<<setprecision(5)<<slopes[polygonStartIdx + ei]<< ")";
-
+			float tmpy, tmpx;
+			int hP, tP;
+			if (polysize-1 == j)
 			{
-				if (abs(slopes[ polygonStartIdx + ( (ei==0)?(polysize-1):(ei-1) ) ] - slopes[polygonStartIdx + ei]) < 0.001)
-				{
-					removableEdgePoint.push_back(polygonStartIdx + ei);
-					cpusecnt[polygonStartIdx + ei]--;
-					uvusecnt[mesh->GetTextureUVIndex(pi, ei)]--;
-				}
+				tP = edgesPoints[mesh->GetMeshEdgeIndexForPolygon(i, 0)];
+				hP = edgesPoints[mesh->GetMeshEdgeIndexForPolygon(i, j)];
+				tmpy = cps[hP][1] - cps[tP][1];
+				tmpx = cps[hP][0] - cps[tP][0];
 			}
-			
-			prevslope = slopes[polygonStartIdx + ei];
+			else
+			{
+				tP = edgesPoints[mesh->GetMeshEdgeIndexForPolygon(i, j + 1)];
+				hP = edgesPoints[mesh->GetMeshEdgeIndexForPolygon(i, j)];
+				
+				tmpy = cps[hP][1] - cps[tP][1];
+				tmpx = cps[hP][0] - cps[tP][0];
+			}
+
+			float slope;
+			if (abs(tmpx) < 0.0001)
+				slope = 99999;
+			else if (abs(tmpy) < 0.0001)
+				slope = 0;
+			else
+				slope = tmpy / tmpx;
+			slopes[i].push_back(slope);
+			output << "(" << setw(3) << hP << "-" << setw(3) << tP << ")" << setw(10) << slope << ",";
 		}
 		output << endl;
-
 	}
-	output << "removable edges : ";
-	for (int i = 0; i < removableEdgePoint.size(); i++)
+}
+bool countUVandCPusage(vector<int> &cntUV, vector<int> &cntCP, FbxMesh* mesh)
+{
+	for (int i = 0; i < mesh->mControlPoints.GetCount(); i++)
+		cntCP.push_back(0);
+	FbxLayerElementArrayTemplate<FbxVector2>* uvlayer;
+	if (mesh->GetTextureUV(&uvlayer) == false)
 	{
-		output << removableEdgePoint[i] << ", ";
+		return false;
 	}
-	output << endl;
-
-	output << "cp use cnt : ";
-	for (int i = 0; i < cpusecnt.size(); i++)
+	
+	for (int i = 0; i < uvlayer->GetCount(); i++)
 	{
-		output << cpusecnt[i] << ",";
+		cntUV.push_back(0);
 	}
-	output << endl;
 
-	output << "uv use cnt : ";
-	for (int i = 0; i < uvusecnt.size(); i++)
+	for (int i = 0; i < mesh->GetPolygonCount(); i++)
 	{
-		output << uvusecnt[i] << ",";
-	}
-	output << endl;
-	output << "meshinfo" << endl;
-	output << "uvcnt : " << mesh->GetTextureUVCount() << endl;
-
-	//removableEdgePoint : 지우는 엣지포인트
-	//uvusecnt, cpusecnt : 안쓰는 uv랑 cp
-	vector<int> cpRedirectTable;
-	vector<FbxVector4> newcparr;
-	int subs = 0;
-	for (int i = 0; i < cpusecnt.size(); i++)
-	{
-		if (cpusecnt[i] > 0)
+		for (int j = 0; j < mesh->GetPolygonSize(i); j++)
 		{
-			cpRedirectTable.push_back(i - subs);
-			newcparr.push_back(cps[i]);
-		}
-		else
-		{
-			subs++;
-			cpRedirectTable.push_back(-1);
+			cntUV[mesh->GetTextureUVIndex(i, j)]++;
+			cntCP[mesh->GetMeshEdgeIndexForPolygon(i, j)]++;
 		}
 	}
-	vector<int> uvRedirectTable;
-	vector<FbxVector2> newuvarr;
-	subs = 0;
-	for (int i = 0; i < uvusecnt.size(); i++)
+	return true;
+}
+bool getPolygonRemovableEdgeIndices(vector<vector<int>>& rEdgeInfo, FbxMesh* mesh)
+{
+	vector<vector<float>> slopes;
+	computeAllSlopes(slopes, mesh);
+	output << "removable edge indices-----------" << endl;
+	for (int pi = 0; pi < mesh->GetPolygonCount(); pi++)
 	{
-		if (uvusecnt[i] > 0)
+		int polygonStartIdx = mesh->GetPolygonVertexIndex(pi);
+		int polysize = mesh->GetPolygonSize(pi);
+		rEdgeInfo.push_back(vector<int>());
+		output << "polygon." << setw(3) << pi;
+		for (int ei = 0; ei < polysize; ei++)
 		{
-			uvRedirectTable.push_back(i - subs);
+			int x = (ei == 0) ? slopes[pi].size() - 1 : ei-1;
+			
+			float slope1 = slopes[pi][x];
+			float slope2 = slopes[pi][ei];
+			if (abs(slope1 - slope2) < 0.001)
+			{
+				output << setw(4) << ei;
+				rEdgeInfo[pi].push_back(ei);
+			}
 		}
-		else
-		{
-			subs++;
-			uvRedirectTable.push_back(-1);
-		}
+		output << endl;
 	}
+
+	return true;
+}
+void collapseMesh(FbxMesh* mesh)
+{
+	vector<int> cpusecnt;
+	vector<int> uvusecnt;
+
+	countUVandCPusage(uvusecnt, cpusecnt, mesh);
+
+	vector<vector<int>> removableEdgePoints;
+	getPolygonRemovableEdgeIndices(removableEdgePoints, mesh);
+	
+	
+
 
 }
 
