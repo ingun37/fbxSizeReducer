@@ -47,32 +47,27 @@ polygon. 16
 polygon. 17
 polygon. 18
 polygon. 19
-	cluster no.0 has 0 connected verts
-	cluster no.1 has 4 connected verts
-	cluster no.2 has 4 connected verts
-	cluster no.3 has 4 connected verts
-	cluster no.4 has 4 connected verts
-	cluster no.5 has 4 connected verts
-	cluster no.6 has 0 connected verts
-	cluster no.7 has 0 connected verts
-	cluster no.8 has 0 connected verts
-	cluster no.9 has 0 connected verts
-	cluster no.10 has 4 connected verts
-	cluster no.11 has 4 connected verts
-	cluster no.12 has 10 connected verts
-	cluster no.13 has 8 connected verts
-	cluster no.14 has 6 connected verts
-	cluster no.15 has 4 connected verts
-	cluster no.16 has 4 connected verts
-	cluster no.17 has 4 connected verts
-	cluster no.18 has 4 connected verts
-	cluster no.19 has 4 connected verts
-	cluster no.20 has 4 connected verts
-	cluster no.21 has 0 connected verts
-	cluster no.22 has 4 connected verts
-	cluster no.23 has 4 connected verts
-	cluster no.24 has 0 connected verts
-	cluster no.25 has 5 connected verts
+removable cp----
+polygon. 0 : 
+polygon. 1 : 
+polygon. 2 : 
+polygon. 3 : 
+polygon. 4 : 
+polygon. 5 : 
+polygon. 6 : P:25,U24,
+polygon. 7 : P:30,U29,P:29,U30,
+polygon. 8 : 
+polygon. 9 : P:39,U39,P:40,U40,P:41,U41,P:42,U42,P:43,U43,P:44,U44,
+polygon.10 : 
+polygon.11 : 
+polygon.12 : 
+polygon.13 : 
+polygon.14 : 
+polygon.15 : 
+polygon.16 : 
+polygon.17 : 
+polygon.18 : 
+polygon.19 : 
 scene's node 2 : root, childcnt : 2, att type : 3
 scene's node 3 : body, childcnt : 8, att type : 3
 scene's node 4 : leg_l, childcnt : 0, att type : 3

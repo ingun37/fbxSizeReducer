@@ -1,7 +1,0 @@
-root node with no vert attached's curve : 0,0
-weapon_R node with no vert attached's curve : 0,0
-arm_l node with no vert attached's curve : 0,0
-arm_a node with no vert attached's curve : 0,0
-weapon_L node with no vert attached's curve : 0,0
-hairsupporter_temp node with no vert attached's curve : 0,0
-overhead node with no vert attached's curve : 0,0

@@ -288,6 +288,23 @@ bool getPolygonRemovableEdgeIndices(vector<vector<int>>& rEdgeInfo, FbxMesh* mes
 
 	return true;
 }
+
+bool getPolygonRemovableUVandCPwithRemovedEdges(FbxMesh* mesh, vector<int> &rUV, vector<int> &rCP, const vector<vector<int>> &rEdges)
+{
+	output << "removable cp----" << endl;
+	for (int i = 0; i < rEdges.size(); i++)
+	{
+		output << "polygon." << setw(2) << i << " : ";
+		for (int j = 0; j < rEdges[i].size(); j++)
+		{
+			rCP.push_back(mesh->GetPolygonVertex(i, j));
+			rUV.push_back(mesh->GetTextureUVIndex(i, j));
+			output << "P:" << mesh->GetPolygonVertex(i, j) << ","<<"U" << mesh->GetTextureUVIndex(i,j) << ",";
+		}
+		output << endl;
+	}
+	return true;
+}
 void collapseMesh(FbxMesh* mesh)
 {
 	vector<int> cpusecnt;
@@ -297,9 +314,8 @@ void collapseMesh(FbxMesh* mesh)
 
 	vector<vector<int>> removableEdgePoints;
 	getPolygonRemovableEdgeIndices(removableEdgePoints, mesh);
-	
-	
-
+	vector<int> ruv, rcp;
+	getPolygonRemovableUVandCPwithRemovedEdges(mesh, ruv, rcp, removableEdgePoints);
 
 }
 
@@ -487,7 +503,7 @@ int main(int argc, char **argv)
 						for (int kri = keys2Remove.size() - 1; kri >= 0; kri--)
 						{
 							
-							curve->KeyRemove(keys2Remove[kri]);
+							//curve->KeyRemove(keys2Remove[kri]);
 						}
 						output2 << endl;
 						//output << ", cubic:linear:const : " << cubic << ":" << linear << ":" << cons << endl;
