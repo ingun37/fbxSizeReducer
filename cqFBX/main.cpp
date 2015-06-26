@@ -211,12 +211,38 @@ void collapseMesh(FbxMesh* mesh)
 	output << "cpcpx : ";
 
 	const FbxArray<FbxVector4>& cps = mesh->mControlPoints;
+	
+	vector<int> cpusecnt;
+	vector<int> uvusecnt;
+	//output << "cps ref " << &cps << ", " << &(cps[0]) << ", " << &(cps[0][0]) << endl;
+	//FbxArray<FbxVector4> ff = mesh->mControlPoints;
+	//output << "cps cpy " << &ff<< ", " << &(ff[0]) << ", " << &(ff[0][0]) << endl;
 	for (int i = 0; i < cps.GetCount(); i++)
 	{
-		output << setw(13)  << cps[i][0];
+		cpusecnt.push_back(0);
 	}
-	
-	output << endl;
+	for (int i = 0; i < mesh->GetTextureUVCount(); i++)
+	{
+		uvusecnt.push_back(0);
+	}
+	FbxLayerElementArrayTemplate<FbxVector2>* uvarr;
+	if (mesh->GetTextureUV(&uvarr))
+	{
+		if (mesh->GetTextureUVCount() == uvarr->GetCount())
+			output << "kakakakakakakakakak" << endl;
+		output << "uv : ";
+		for (int i = 0; i < uvarr->GetCount(); i++)
+		{
+			output << "(" << (*uvarr)[i][0] << "," << (*uvarr)[i][1] << ")" << endl;
+		}
+		output << endl;
+	}
+	else
+	{
+		output << "fail to read uv..." << endl;
+		return;
+	}
+
 	output << "cpcpy : ";
 	for (int i = 0; i < cps.GetCount(); i++)
 	{
@@ -225,32 +251,13 @@ void collapseMesh(FbxMesh* mesh)
 
 	output << endl;
 
-	output << "cpcpd : ";
-	for (int i = 0; i < cps.GetCount(); i++)
-	{
-		if (i == 0)
-			output << setw(13) << "h";
-		else
-		{
-			float tmpx = cps[i][0] - cps[i - 1][0];
-			float tmpy = cps[i][1] - cps[i - 1][1];
-			float slope;
-			if (abs(tmpx) < 0.0001)
-				slope = 99999;
-			else if (abs(tmpy) < 0.0001)
-				slope = 0;
-			else
-				slope = tmpy / tmpx;
-			output << setw(13) << slope;
-		}
-	}
-
 	const FbxArray<int>& edgeVIdx = mesh->mPolygonVertices;
 	output << endl;
 	output << "mpvts : ";
 	for (int i = 0; i < edgeVIdx.GetCount(); i++)
 	{
 		output << setw(13) << edgeVIdx[i];
+		cpusecnt[edgeVIdx[i]]++;
 	}
 	output << endl;
 
@@ -258,39 +265,45 @@ void collapseMesh(FbxMesh* mesh)
 	vector<float> slopes;
 	vector<int> polystarts;
 	vector<int> polysizes;
+	
 	for (int i = 0; i < mesh->GetPolygonCount(); i++)
 	{
 		polystarts.push_back(mesh->GetPolygonVertexIndex(i));
 		polysizes.push_back(mesh->GetPolygonSize(i));
+		for (int j = 0; j < mesh->GetPolygonSize(i); j++)
+		{
+			uvusecnt[mesh->GetTextureUVIndex(i, j)]++;
+			
+		}
 	}
 	int startcnt = 0;
 	for (int i = 0; i <edgeVIdx.GetCount(); i++)
 	{
-		{
-			float tmpy;
-			float tmpx;
+		
+		float tmpy;
+		float tmpx;
 
-			if (i == polystarts[startcnt] + polysizes[startcnt]-1)
-			{
-				tmpy = cps[edgeVIdx[ polystarts[startcnt] ]][1] - cps[edgeVIdx[i]][1];
-				tmpx = cps[edgeVIdx[ polystarts[startcnt] ]][0] - cps[edgeVIdx[i]][0];
-				startcnt++;
-			}
-			else
-			{
-				tmpy = cps[edgeVIdx[i+1]][1] - cps[edgeVIdx[i]][1];
-				tmpx = cps[edgeVIdx[i+1]][0] - cps[edgeVIdx[i]][0];
-			}
-			float slope;
-			if (abs(tmpx) < 0.0001)
-				slope = 99999;
-			else if (abs(tmpy) < 0.0001)
-				slope = 0;
-			else
-				slope = tmpy / tmpx;
-			slopes.push_back(slope);
-			output << setw(11) << slope << (tmpx>0?"+":"-") << (tmpy>0?"+":"-");
+		if (i == polystarts[startcnt] + polysizes[startcnt]-1)
+		{
+			tmpy = cps[edgeVIdx[ polystarts[startcnt] ]][1] - cps[edgeVIdx[i]][1];
+			tmpx = cps[edgeVIdx[ polystarts[startcnt] ]][0] - cps[edgeVIdx[i]][0];
+			startcnt++;
 		}
+		else
+		{
+			tmpy = cps[edgeVIdx[i+1]][1] - cps[edgeVIdx[i]][1];
+			tmpx = cps[edgeVIdx[i+1]][0] - cps[edgeVIdx[i]][0];
+		}
+		float slope;
+		if (abs(tmpx) < 0.0001)
+			slope = 99999;
+		else if (abs(tmpy) < 0.0001)
+			slope = 0;
+		else
+			slope = tmpy / tmpx;
+		slopes.push_back(slope);
+		output << setw(11) << slope << (tmpx>0?"+":"-") << (tmpy>0?"+":"-");
+		
 	}
 
 	output << endl;
@@ -299,7 +312,7 @@ void collapseMesh(FbxMesh* mesh)
 	output << "total polyv num : " << polyvnum << endl;
 	
 	vector<int> removableEdgePoint;
-
+	vector<int> refCntForCps;
 	for (int pi = 0; pi < mesh->GetPolygonCount(); pi++)
 	{
 		output << "poly " << pi << " : ";
@@ -319,6 +332,8 @@ void collapseMesh(FbxMesh* mesh)
 				if (abs(slopes[ polygonStartIdx + ( (ei==0)?(polysize-1):(ei-1) ) ] - slopes[polygonStartIdx + ei]) < 0.001)
 				{
 					removableEdgePoint.push_back(polygonStartIdx + ei);
+					cpusecnt[polygonStartIdx + ei]--;
+					uvusecnt[mesh->GetTextureUVIndex(pi, ei)]--;
 				}
 			}
 			
@@ -327,12 +342,63 @@ void collapseMesh(FbxMesh* mesh)
 		output << endl;
 
 	}
-	output << "removable points : ";
+	output << "removable edges : ";
 	for (int i = 0; i < removableEdgePoint.size(); i++)
 	{
 		output << removableEdgePoint[i] << ", ";
 	}
 	output << endl;
+
+	output << "cp use cnt : ";
+	for (int i = 0; i < cpusecnt.size(); i++)
+	{
+		output << cpusecnt[i] << ",";
+	}
+	output << endl;
+
+	output << "uv use cnt : ";
+	for (int i = 0; i < uvusecnt.size(); i++)
+	{
+		output << uvusecnt[i] << ",";
+	}
+	output << endl;
+	output << "meshinfo" << endl;
+	output << "uvcnt : " << mesh->GetTextureUVCount() << endl;
+
+	//removableEdgePoint : 지우는 엣지포인트
+	//uvusecnt, cpusecnt : 안쓰는 uv랑 cp
+	vector<int> cpRedirectTable;
+	vector<FbxVector4> newcparr;
+	int subs = 0;
+	for (int i = 0; i < cpusecnt.size(); i++)
+	{
+		if (cpusecnt[i] > 0)
+		{
+			cpRedirectTable.push_back(i - subs);
+			newcparr.push_back(cps[i]);
+		}
+		else
+		{
+			subs++;
+			cpRedirectTable.push_back(-1);
+		}
+	}
+	vector<int> uvRedirectTable;
+	vector<FbxVector2> newuvarr;
+	subs = 0;
+	for (int i = 0; i < uvusecnt.size(); i++)
+	{
+		if (uvusecnt[i] > 0)
+		{
+			uvRedirectTable.push_back(i - subs);
+		}
+		else
+		{
+			subs++;
+			uvRedirectTable.push_back(-1);
+		}
+	}
+
 }
 
 int main(int argc, char **argv)
@@ -435,7 +501,6 @@ int main(int argc, char **argv)
 		if (rnd && rnd->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eSkeleton)
 		{
 			output3 << rnd->GetName() << " node with no vert attached's curve : " << rnd->GetSrcObjectCount<FbxAnimCurve>() << "," << rnd->GetSrcObjectCount<FbxAnimCurveNode>() << endl;
-
 		}
 	}
 
