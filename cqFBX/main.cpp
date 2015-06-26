@@ -2,6 +2,7 @@
 #define comp_level_deriv 0.01
 #define comp_level_integError 0.01
 #include <vector>
+#include <string.h>
 #include <iostream>
 #include <fstream>
 #include <fbxsdk.h>
@@ -187,10 +188,166 @@ bool keepTestHorizon(  FbxAnimCurve* curve, FbxAnimCurveKey prevkey, FbxAnimCurv
 	output2 << endl;
 	return false;
 }
+
+void collapseMesh(FbxMesh* mesh)
+{
+	if (!mesh->IsTriangleMesh())
+	{
+		output << "not triangle mesh" << endl;
+	//	return;
+	}
+	
+
+	output << "poly cnt : " << mesh->GetPolygonCount() << endl;
+	int accu=0;
+	const int* allverts = mesh->GetPolygonVertices();
+	output << "edge cnt : " << mesh->GetMeshEdgeCount() << endl;
+	output << "edge  : ";
+	for (int i = 0; i < mesh->mEdgeArray.GetCount(); i++)
+	{
+		output << setw(13) << mesh->mEdgeArray[i];
+	}
+	output << endl;
+	output << "cpcpx : ";
+
+	const FbxArray<FbxVector4>& cps = mesh->mControlPoints;
+	for (int i = 0; i < cps.GetCount(); i++)
+	{
+		output << setw(13)  << cps[i][0];
+	}
+	
+	output << endl;
+	output << "cpcpy : ";
+	for (int i = 0; i < cps.GetCount(); i++)
+	{
+		output << setw(13)  << cps[i][1];
+	}
+
+	output << endl;
+
+	output << "cpcpd : ";
+	for (int i = 0; i < cps.GetCount(); i++)
+	{
+		if (i == 0)
+			output << setw(13) << "h";
+		else
+		{
+			float tmpx = cps[i][0] - cps[i - 1][0];
+			float tmpy = cps[i][1] - cps[i - 1][1];
+			float slope;
+			if (abs(tmpx) < 0.0001)
+				slope = 99999;
+			else if (abs(tmpy) < 0.0001)
+				slope = 0;
+			else
+				slope = tmpy / tmpx;
+			output << setw(13) << slope;
+		}
+	}
+
+	const FbxArray<int>& edgeVIdx = mesh->mPolygonVertices;
+	output << endl;
+	output << "mpvts : ";
+	for (int i = 0; i < edgeVIdx.GetCount(); i++)
+	{
+		output << setw(13) << edgeVIdx[i];
+	}
+	output << endl;
+
+	output << "derivs : ";
+	vector<float> slopes;
+	vector<int> polystarts;
+	vector<int> polysizes;
+	for (int i = 0; i < mesh->GetPolygonCount(); i++)
+	{
+		polystarts.push_back(mesh->GetPolygonVertexIndex(i));
+		polysizes.push_back(mesh->GetPolygonSize(i));
+	}
+	int startcnt = 0;
+	for (int i = 0; i <edgeVIdx.GetCount(); i++)
+	{
+		{
+			float tmpy;
+			float tmpx;
+
+			if (i == polystarts[startcnt] + polysizes[startcnt]-1)
+			{
+				tmpy = cps[edgeVIdx[ polystarts[startcnt] ]][1] - cps[edgeVIdx[i]][1];
+				tmpx = cps[edgeVIdx[ polystarts[startcnt] ]][0] - cps[edgeVIdx[i]][0];
+				startcnt++;
+			}
+			else
+			{
+				tmpy = cps[edgeVIdx[i+1]][1] - cps[edgeVIdx[i]][1];
+				tmpx = cps[edgeVIdx[i+1]][0] - cps[edgeVIdx[i]][0];
+			}
+			float slope;
+			if (abs(tmpx) < 0.0001)
+				slope = 99999;
+			else if (abs(tmpy) < 0.0001)
+				slope = 0;
+			else
+				slope = tmpy / tmpx;
+			slopes.push_back(slope);
+			output << setw(11) << slope << (tmpx>0?"+":"-") << (tmpy>0?"+":"-");
+		}
+	}
+
+	output << endl;
+
+	int polyvnum = mesh->GetPolygonVertexCount();
+	output << "total polyv num : " << polyvnum << endl;
+	
+	vector<int> removableEdgePoint;
+
+	for (int pi = 0; pi < mesh->GetPolygonCount(); pi++)
+	{
+		output << "poly " << pi << " : ";
+		int polygonStartIdx = mesh->GetPolygonVertexIndex(pi);
+		int polysize = mesh->GetPolygonSize(pi);
+		
+		output << "size:" << polysize << ", startidx:" << polygonStartIdx;
+		output << ", link : ";
+		float prevslope;
+		
+		for (int ei = 0; ei < polysize; ei++)
+		{
+
+			output << ", (" << edgeVIdx[polygonStartIdx+ei]<<","<<edgeVIdx[polygonStartIdx+((ei+1)%polysize)] <<":"<<setprecision(5)<<slopes[polygonStartIdx + ei]<< ")";
+
+			if (ei > 0)
+			{
+				if (abs(prevslope - slopes[polygonStartIdx + ei]) < 0.001)
+				{
+					removableEdgePoint.push_back(polygonStartIdx + ei);
+				}
+			}
+			
+			prevslope = slopes[polygonStartIdx + ei];
+		}
+		output << endl;
+
+	}
+	output << "removable points : ";
+	for (int i = 0; i < removableEdgePoint.size(); i++)
+	{
+		output << removableEdgePoint[i] << ", ";
+	}
+	output << endl;
+}
+
 int main(int argc, char **argv)
 {
+#ifndef _DEBUG
+	if (argc != 2)
+	{
+		printf("invalid arg");
+		return 0;
+	}
+	const char* filename = argv[1];
+#else
 	const char* filename = "PC@GUN.fbx";
-
+#endif
 	
 	output.open("output.txt", ios::out | ios::trunc);
 	output2.open("output2.txt", ios::out | ios::trunc);
@@ -224,6 +381,8 @@ int main(int argc, char **argv)
 	output << "animstackcnt : " << animstackcnt << endl;
 
 	output << "------------" << endl;
+	vector<FbxNode*> removableNodes;
+
 	for (int i = 0; i < scene->GetNodeCount(); i++)
 	{
 		FbxNode* node = scene->GetNode(i);
@@ -234,14 +393,26 @@ int main(int argc, char **argv)
 			if (node->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eMesh)
 			{
 				FbxMesh* mesh = node->GetMesh();
+
 				output << ", mem usage : " << mesh->MemoryUsage() << ", deformer cnt : " << mesh->GetDeformerCount(FbxDeformer::EDeformerType::eSkin) << endl;
+				collapseMesh(mesh);
 				FbxSkin* skin = (FbxSkin*) (mesh->GetDeformer(0, FbxDeformer::EDeformerType::eSkin));
-				for (int cli = 0; cli < skin->GetClusterCount(); cli++)
+				if (skin)
 				{
-					FbxCluster* cluster = skin->GetCluster(cli);
-					output << "\tcluster no." << cli << " has " << cluster->GetControlPointIndicesCount() << " connected verts" << endl;
-					//cluster->
-					//skin->RemoveCluster(cluster);효과없음
+					
+					for (int cli = 0; cli < skin->GetClusterCount(); cli++)
+					{
+						FbxCluster* cluster = skin->GetCluster(cli);
+						output << "\tcluster no." << cli << " has " << cluster->GetControlPointIndicesCount() << " connected verts" << endl;
+						if (cluster->GetControlPointIndicesCount() == 0)
+							removableNodes.push_back( cluster->GetLink() );
+						
+						//cluster->
+						//skin->RemoveCluster(cluster);효과없음
+					}
+
+					
+					
 				}
 				if (mesh->IsTriangleMesh())
 				{
@@ -258,6 +429,17 @@ int main(int argc, char **argv)
 			output << ", att type : none" << endl;
 		}
 	}
+
+	for (int rni = 0; rni < removableNodes.size(); rni++)
+	{
+		FbxNode* rnd = removableNodes[rni];
+		if (rnd && rnd->GetNodeAttribute()->GetAttributeType() == FbxNodeAttribute::EType::eSkeleton)
+		{
+			output3 << rnd->GetName() << " node with no vert attached's curve : " << rnd->GetSrcObjectCount<FbxAnimCurve>() << "," << rnd->GetSrcObjectCount<FbxAnimCurveNode>() << endl;
+
+		}
+	}
+
 	output << "-----------animinfo" << endl;
 	int cubic = 0, linear = 0, cons = 0;
 	for (int si = 0; si < animstackcnt; si++)
@@ -322,13 +504,13 @@ int main(int argc, char **argv)
 							prevkey = curve->KeyGet(cki-1);
 							nextkey = curve->KeyGet(cki + 1);
 							
-							bool keepit;
+							bool keepit = true;
 
 							output2 << ci << "-" << cki;
 
 //							keepit = keepTestHorizon(curve, prevkey, currkey, nextkey);
 	//						if (keepit)
-								keepit = slopkeepTest(curve, prevkey, currkey, nextkey);
+	//							keepit = slopkeepTest(curve, prevkey, currkey, nextkey);
 
 							if (!keepit)
 							{
@@ -364,7 +546,7 @@ int main(int argc, char **argv)
 	}
 	output << "cubic:linear:const  " << cubic << ":" << linear << ":" << cons << endl;
 	FbxExporter* exporter = FbxExporter::Create(fm, "");
-	const char* outFBXName = "PC@aaaaf.fbx";
+	const char* outFBXName = "after.fbx";
 
 	bool exportstatus = exporter->Initialize(outFBXName, -1, fm->GetIOSettings());
 	if (exportstatus == false)
