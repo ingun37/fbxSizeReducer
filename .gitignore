@@ -1,2 +1,5 @@
 cqFBX.sdf
 cqFBX.opensdf
+*.fbx
+*.exe
+*.pdb
