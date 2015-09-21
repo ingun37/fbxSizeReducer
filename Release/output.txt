@@ -1,0 +1,790 @@
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 2.22045e-016, -8.15663e-056, 6.61744e-024
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 2.06454e-008, -12.1237, 16.4894
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -3.34816e-008, -6.73431e-008, -44.6526
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 7.88209, -2.83637e-008, -60.2264
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -2.94353e-009, 11.7277, 16.7733
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -2.81224e-008, -6.7343e-008, -44.6526
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 7.88209, -1.63982e-008, -60.2264
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 8.63503, 0.351426, -43.6546
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -0.950555, -22.5058, -0.688255
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 1.95545, 0.771947, -33.2151
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 8.12623, -6.18889e-007, -31.3512
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -0.950555, 22.7438, -2.22214
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 1.18695e-006, 0.0590389, -30.2406
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 5.89143, -4.37848e-007, -31.3512
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -1.02975, 6.08845e-010, -17.4499
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 2.66454e-016, -9.78796e-056, 7.94093e-024
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 2.47745e-008, -14.5484, 19.7872
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -4.01779e-008, -8.08117e-008, -53.5831
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 9.45851, -3.40365e-008, -72.2717
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -3.53223e-009, 14.0732, 20.128
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -3.37468e-008, -8.08116e-008, -53.5831
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 9.45851, -1.96778e-008, -72.2717
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 10.362, 0.421711, -52.3855
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -1.14067, -27.0069, -0.825906
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 2.34654, 0.926336, -39.8582
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 9.75147, -7.42667e-007, -37.6214
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -1.14067, 27.2926, -2.66657
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 1.42435e-006, 0.0708467, -36.2887
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 7.06972, -5.25418e-007, -37.6214
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -1.2357, 7.30613e-010, -20.9399
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 3.10862e-016, -1.14193e-055, 9.26442e-024
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 2.89036e-008, -16.9732, 23.0851
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -4.68742e-008, -9.42803e-008, -62.5136
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 11.0349, -3.97092e-008, -84.3169
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -4.12094e-009, 16.4188, 23.4826
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -3.93713e-008, -9.42803e-008, -62.5136
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 11.0349, -2.29575e-008, -84.3169
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 12.089, 0.491996, -61.1164
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -1.33078, -31.5081, -0.963557
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 2.73763, 1.08073, -46.5012
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 11.3767, -8.66445e-007, -43.8916
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -1.33078, 31.8414, -3.111
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 1.66174e-006, 0.0826545, -42.3368
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 8.24801, -6.12988e-007, -43.8916
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -1.44165, 8.52382e-010, -24.4299
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 3.55271e-016, -1.30506e-055, 1.05879e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 3.30327e-008, -19.3979, 26.383
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -5.35705e-008, -1.07749e-007, -71.4441
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 12.6113, -4.5382e-008, -96.3622
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -4.70964e-009, 18.7643, 26.8373
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -4.49958e-008, -1.07749e-007, -71.4441
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 12.6113, -2.62371e-008, -96.3622
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 13.8161, 0.562282, -69.8473
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -1.52089, -36.0092, -1.10121
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 3.12871, 1.23511, -53.1442
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 13.002, -9.90223e-007, -50.1619
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -1.52089, 36.3901, -3.55542
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 1.89913e-006, 0.0944623, -48.3849
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 9.42629, -7.00557e-007, -50.1619
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -1.6476, 9.74151e-010, -27.9199
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 3.9968e-016, -1.46819e-055, 1.19114e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 3.71617e-008, -21.8226, 29.6809
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -6.02668e-008, -1.21217e-007, -80.3746
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 14.1878, -5.10547e-008, -108.407
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -5.29835e-009, 21.1099, 30.192
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -5.06202e-008, -1.21217e-007, -80.3746
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 14.1878, -2.95167e-008, -108.407
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 15.5431, 0.632567, -78.5782
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -1.711, -40.5104, -1.23886
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 3.5198, 1.3895, -59.7872
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 14.6272, -1.114e-006, -56.4321
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -1.711, 40.9389, -3.99985
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 2.13652e-006, 0.10627, -54.4331
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 10.6046, -7.88127e-007, -56.4321
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -1.85355, 1.09592e-009, -31.4099
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 4.12908e-008, -24.2474, 32.9787
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -6.69632e-008, -1.34686e-007, -89.3051
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 15.7642, -5.67275e-008, -120.453
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -5.88706e-009, 23.4554, 33.5466
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -5.62447e-008, -1.34686e-007, -89.3051
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 15.7642, -3.27964e-008, -120.453
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 17.2701, 0.702852, -87.3091
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -1.90111, -45.0115, -1.37651
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 3.91089, 1.54389, -66.4303
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 16.2525, -1.23778e-006, -62.7023
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -1.90111, 45.4877, -4.44428
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 2.37391e-006, 0.118078, -60.4812
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 11.7829, -8.75697e-007, -62.7023
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -2.0595, 1.21769e-009, -34.8999
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 4.88498e-016, -1.79446e-055, 1.45584e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 4.54199e-008, -26.6721, 36.2766
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -7.36595e-008, -1.48155e-007, -98.2357
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 17.3406, -6.24002e-008, -132.498
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -6.47576e-009, 25.8009, 36.9013
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -6.18692e-008, -1.48155e-007, -98.2357
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 17.3406, -3.6076e-008, -132.498
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 18.9971, 0.773137, -96.04
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -2.09122, -49.5127, -1.51416
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 4.30198, 1.69828, -73.0733
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 17.8777, -1.36156e-006, -68.9726
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -2.09122, 50.0364, -4.88871
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 2.6113e-006, 0.129886, -66.5293
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 12.9612, -9.63266e-007, -68.9726
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -2.26546, 1.33946e-009, -38.3898
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 5.32907e-016, -1.95759e-055, 1.58819e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 4.9549e-008, -29.0969, 39.5745
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -8.03558e-008, -1.61623e-007, -107.166
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 18.917, -6.8073e-008, -144.543
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -7.06447e-009, 28.1465, 40.256
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -6.74937e-008, -1.61623e-007, -107.166
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 18.917, -3.93556e-008, -144.543
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 20.7241, 0.843422, -104.771
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -2.28133, -54.0139, -1.65181
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 4.69307, 1.85267, -79.7163
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 19.5029, -1.48533e-006, -75.2428
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -2.28133, 54.5852, -5.33314
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 2.84869e-006, 0.141693, -72.5774
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 14.1394, -1.05084e-006, -75.2428
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -2.47141, 1.46123e-009, -41.8798
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 5.77316e-016, -2.12072e-055, 1.72054e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 5.36781e-008, -31.5216, 42.8724
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -8.70521e-008, -1.75092e-007, -116.097
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 20.4934, -7.37457e-008, -156.589
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -7.65317e-009, 30.492, 43.6106
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -7.31181e-008, -1.75092e-007, -116.097
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 20.4934, -4.26353e-008, -156.589
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 22.4511, 0.913708, -113.502
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -2.47144, -58.515, -1.78946
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 5.08416, 2.00706, -86.3594
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 21.1282, -1.60911e-006, -81.513
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -2.47144, 59.134, -5.77756
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 3.08608e-006, 0.153501, -78.6255
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 15.3177, -1.13841e-006, -81.513
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -2.67736, 1.583e-009, -45.3698
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
+
+skelnode Spine_1 : 
+    original trans : 4.44089e-016, -1.63133e-055, 1.32349e-023
+    scaleddd trans : 6.21725e-016, -2.28386e-055, 1.85288e-023
+skelnode R_Leg_1 : 
+    original trans : 4.12908e-008, -24.2474, 32.9787
+    scaleddd trans : 5.78071e-008, -33.9463, 46.1702
+skelnode R_Leg_2 : 
+    original trans : -6.69632e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -9.37484e-008, -1.88561e-007, -125.027
+skelnode R_Leg_3 : 
+    original trans : 15.7642, -5.67275e-008, -120.453
+    scaleddd trans : 22.0699, -7.94185e-008, -168.634
+skelnode L_Leg_1 : 
+    original trans : -5.88706e-009, 23.4554, 33.5466
+    scaleddd trans : -8.24188e-009, 32.8376, 46.9653
+skelnode L_Leg_2 : 
+    original trans : -5.62447e-008, -1.34686e-007, -89.3051
+    scaleddd trans : -7.87426e-008, -1.88561e-007, -125.027
+skelnode L_Leg_3 : 
+    original trans : 15.7642, -3.27964e-008, -120.453
+    scaleddd trans : 22.0699, -4.59149e-008, -168.634
+skelnode Spine_2 : 
+    original trans : 17.2701, 0.702852, -87.3091
+    scaleddd trans : 24.1781, 0.983993, -122.233
+skelnode R_Arm_2 : 
+    original trans : -1.90111, -45.0115, -1.37651
+    scaleddd trans : -2.66155, -63.0162, -1.92711
+skelnode R_Arm_3 : 
+    original trans : 3.91089, 1.54389, -66.4303
+    scaleddd trans : 5.47525, 2.16145, -93.0024
+skelnode R_Arm_4 : 
+    original trans : 16.2525, -1.23778e-006, -62.7023
+    scaleddd trans : 22.7534, -1.73289e-006, -87.7833
+skelnode L_Arm_2 : 
+    original trans : -1.90111, 45.4877, -4.44428
+    scaleddd trans : -2.66155, 63.6827, -6.22199
+skelnode L_Arm_3 : 
+    original trans : 2.37391e-006, 0.118078, -60.4812
+    scaleddd trans : 3.32347e-006, 0.165309, -84.6737
+skelnode L_Arm_4 : 
+    original trans : 11.7829, -8.75697e-007, -62.7023
+    scaleddd trans : 16.496, -1.22598e-006, -87.7833
+skelnode Head : 
+    original trans : -2.0595, 1.21769e-009, -34.8999
+    scaleddd trans : -2.88331, 1.70476e-009, -48.8598
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mesh node : top01_1, mem usage : 766180, deformer cnt : 1
+	cluster no.0 has 674 connected verts
+	cluster no.1 has 318 connected verts
+	cluster no.2 has 596 connected verts
+	cluster no.3 has 0 connected verts
+	cluster no.4 has 200 connected verts
+	cluster no.5 has 574 connected verts
+	cluster no.6 has 0 connected verts
+	cluster no.7 has 182 connected verts
+	cluster no.8 has 70 connected verts
+	cluster no.9 has 60 connected verts
+	cluster no.10 has 0 connected verts
+	cluster no.11 has 47 connected verts
+	cluster no.12 has 59 connected verts
+	cluster no.13 has 0 connected verts
+	cluster no.14 has 0 connected verts
