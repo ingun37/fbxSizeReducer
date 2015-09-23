@@ -17,16 +17,30 @@ ofstream output, output2, output3;
 int main(int argc, char **argv)
 {
 #ifndef _DEBUG
-	if (argc != 2)
+	if (argc != 5)
 	{
 		printf("invalid arg");
-		return 0;
+		return -1;
 	}
 	const char* filename = argv[1];
+	const char* strStart = argv[2];
+	const char* strTerm = argv[3];
+	const char* strCnt = argv[4];
 #else
 	const char* filename = "PC@GUN.fbx";
+	const char* strStart = "0.5";
+	const char* strTerm = "0.1";
+	const char* strCnt = "10";
 #endif
 	
+	float rtStart, rtTerm;
+	int rtCnt;
+	puts("asdf");
+	sscanf_s(strStart, "%f", &rtStart);
+	sscanf_s(strTerm, "%f", &rtTerm);
+	sscanf_s(strCnt, "%d", &rtCnt);
+	puts("fdsa");
+	printf("%f, %f, %d", rtStart, rtTerm, rtCnt);
 	output.open("output.txt", ios::out | ios::trunc);
 	output2.open("output2.txt", ios::out | ios::trunc);
 	output3.open("output3.txt", ios::out | ios::trunc);
@@ -48,8 +62,8 @@ int main(int argc, char **argv)
 
 	
 
-	double factor = 0.5;
-	for (int fi = 0; fi < 10; fi++)
+	double factor = (double)rtStart;
+	for (int fi = 0; fi < rtCnt; fi++)
 	{
 		FbxImporter* importer = FbxImporter::Create(fm, "");
 		if (!importer->Initialize(filename, -1, fm->GetIOSettings()))
@@ -150,7 +164,7 @@ int main(int argc, char **argv)
 		}
 		exporter->Export(scene);
 		exporter->Destroy();
-		factor += 0.1;
+		factor += (double)rtTerm;
 	}
 
 	
