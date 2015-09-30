@@ -143,6 +143,7 @@ int main(int argc, char **argv)
 								continue;
 							}
 							cluster->SetTransformLinkMatrix(linkedskel->EvaluateGlobalTransform());
+							cluster->SetTransformMatrix(node->EvaluateGlobalTransform());
 						}
 					}
 					else
