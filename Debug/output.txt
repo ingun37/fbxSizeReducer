@@ -1,0 +1,37 @@
+some
+charcnt : 0
+node cnt : 31
+animstackcnt : 1
+------------
+scene's node 0 : RootNode, childcnt : 2, att type : none
+scene's node 1 : polySurface1, childcnt : 0, att type : 4, mem usage : 14264, deformer cnt : 1
+skinner cluster count : 26
+scene's node 2 : root, childcnt : 2, att type : 3
+scene's node 3 : body, childcnt : 8, att type : 3
+scene's node 4 : leg_l, childcnt : 0, att type : 3
+scene's node 5 : leg_r, childcnt : 0, att type : 3
+scene's node 6 : arm_r, childcnt : 1, att type : 3
+scene's node 7 : arm_a, childcnt : 1, att type : 3
+scene's node 8 : weapon_R, childcnt : 0, att type : 3
+scene's node 9 : arm_l, childcnt : 2, att type : 3
+scene's node 10 : arm_a, childcnt : 2, att type : 3
+scene's node 11 : weapon_L, childcnt : 1, att type : 3
+scene's node 12 : weapon_L_temp, childcnt : 0, att type : 3
+scene's node 13 : arm_a_temp, childcnt : 0, att type : 3
+scene's node 14 : arm_l_temp, childcnt : 0, att type : 3
+scene's node 15 : head, childcnt : 11, att type : 3
+scene's node 16 : hair1, childcnt : 0, att type : 3
+scene's node 17 : hair2, childcnt : 0, att type : 3
+scene's node 18 : groggy, childcnt : 0, att type : 3
+scene's node 19 : smile, childcnt : 0, att type : 3
+scene's node 20 : sleepy, childcnt : 0, att type : 3
+scene's node 21 : cry, childcnt : 0, att type : 3
+scene's node 22 : shout, childcnt : 0, att type : 3
+scene's node 23 : angry, childcnt : 0, att type : 3
+scene's node 24 : hairsupporter_temp, childcnt : 0, att type : 3
+scene's node 25 : R_eye, childcnt : 0, att type : 3
+scene's node 26 : L_eye, childcnt : 0, att type : 3
+scene's node 27 : cape, childcnt : 0, att type : 3
+scene's node 28 : followRoot, childcnt : 0, att type : 3
+scene's node 29 : back_acc, childcnt : 0, att type : 3
+scene's node 30 : overhead, childcnt : 0, att type : 3
